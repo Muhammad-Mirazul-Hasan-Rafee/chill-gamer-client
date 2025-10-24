@@ -6,3 +6,7 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineConfig({
   plugins: [tailwindcss(), react()],
 });
+
+
+
+// bg-[rgb(5,8,22)]
