@@ -1,0 +1,11 @@
+Model Information:
+* title:	AH-1W Supercobra Attack Helicopter
+* source:	https://sketchfab.com/3d-models/ah-1w-supercobra-attack-helicopter-a1cc6526ab3e4d159000f2962af30386
+* author:	Muhamad Mirza Arrafi (https://sketchfab.com/nazidefenseforceofficial)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "AH-1W Supercobra Attack Helicopter" (https://sketchfab.com/3d-models/ah-1w-supercobra-attack-helicopter-a1cc6526ab3e4d159000f2962af30386) by Muhamad Mirza Arrafi (https://sketchfab.com/nazidefenseforceofficial) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
