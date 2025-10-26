@@ -4,20 +4,22 @@ import { useFrame } from '@react-three/fiber';
 
 export default function Scene(props) {
   const { nodes, materials } = useGLTF('/scene.gltf');
+  const chopperRef = useRef();
    const fanRef = useRef();
   
 
      // প্রতি frame এ fan ঘোরানো
   useFrame((state, delta) => {
     if (fanRef.current) {
-      fanRef.current.rotation.y += delta * 10; // speed control
+      fanRef.current.rotation.y += delta * 15; // speed control
     }
   });
 
   return (
+    
     <group {...props} dispose={null}>
-      <group scale={1.5}  position={[0, -1, 0]}
-  rotation={[0, Math.PI / 6, 0]}>
+      <group ref={chopperRef} scale={0.7} position={[-0, 2, 0]}
+  rotation={[0, Math.PI / 12, 0]}>
         <mesh geometry={nodes.mesh0datdesirefxme__grill_0.geometry} material={materials.grill} />
         <mesh geometry={nodes['mesh1datdesirefxme__01_-_Default_0'].geometry} material={materials['01_-_Default']} />
         <mesh geometry={nodes['mesh2datdesirefxme__01_-_Default_0'].geometry} material={materials['01_-_Default']} />
@@ -59,9 +61,14 @@ export default function Scene(props) {
         <mesh geometry={nodes.mesh39datdesirefxme__rotor_0.geometry} material={materials.rotor_16} />
         <mesh geometry={nodes.mesh40datdesirefxme__rotor_0.geometry} material={materials.rotor_17} />
         <mesh geometry={nodes.mesh41datdesirefxme__rotor_0.geometry} material={materials.rotor_18} />
+        <mesh ref={fanRef}
+          geometry={nodes.mesh21datdesirefxme__rotor_0.geometry}
+          material={materials.rotor}/>
       </group>
     </group>
+     
   )
+ 
 }
 
 useGLTF.preload('/scene.gltf')

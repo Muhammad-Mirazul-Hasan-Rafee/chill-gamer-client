@@ -53,9 +53,9 @@ const Home = () => {
       <h2 className="text-4xl">Insert your favourite game</h2>
       <br />
 
-      <div className="flex justify-between items-start">
+      <div className="grid grid-cols-2 gap-6 items-start w-[1200px] h-[1000px]">
         {/* Form */}
-        <form>
+        <form className=" justify-evenly grid grid-rows-5">
           {/* Game Title Field */}
           <label htmlFor="title" className="block mb-1 font-medium">
             Game Title:
@@ -65,7 +65,6 @@ const Home = () => {
             placeholder="Game Title"
             className="input input-primary w-[300px] text-gray-400"
           />
-
           {/* Game Short Description Field */}
           <label htmlFor="title" className="block mb-1 font-medium">
             Description:
@@ -75,7 +74,6 @@ const Home = () => {
             placeholder="Description"
             className="input input-primary w-[300px] text-gray-400"
           />
-
           {/* Game Iamge Field */}
           <label htmlFor="title" className="block mb-1 font-medium">
             Image URL:
@@ -85,7 +83,6 @@ const Home = () => {
             placeholder="Url"
             className="input input-primary w-[300px] text-gray-400"
           />
-
           {/* Game Rating Field */}
           <label htmlFor="rating" className="block mb-1 font-medium">
             Rating (1-10):
@@ -95,9 +92,7 @@ const Home = () => {
             placeholder="Rating"
             className="input input-primary w-[300px] text-gray-400"
           />
-
           <br />
-
           {/* Submit Button */}
           <div className="flex justify-end">
             <button
@@ -109,15 +104,22 @@ const Home = () => {
           </div>
         </form>
         {/* Animation Chopper */}
-        <div className="w-1/2 h-auto">
-          <h2>Hey Chopper</h2>
-          <Canvas camera={{ position: [0, 2, 10], fov: 60, near:0.1, far:1000 }}>
+        <div className="w-[680px] border border-amber-400">
+          <Canvas
+            camera={{ position: [0, 2.6, 13], fov: 70}} style={{ width: '50vw', height: '120vh' }}
+          >
             {/* Ambient light পুরো scene টা হালকা উজ্জ্বল করবে */}
-            <ambientLight intensity={2} />
+            <ambientLight intensity={1.2} />
 
             {/* Directional light একটু উঁচু দিক থেকে */}
-            <directionalLight position={[10, 10, 5]} intensity={2} />
-            <OrbitControls minDistance={3} maxDistance={30} autoRotate autoRotateSpeed={1} />
+            <directionalLight position={[5, 10, 5]} intensity={1.5} />
+            <OrbitControls
+              minDistance={3}
+              maxDistance={30}
+              autoRotate
+              autoRotateSpeed={1}
+              enableZoom={false}
+            />
 
             {/* একটু নিচ থেকে আলো */}
             <pointLight position={[0, -5, 5]} intensity={1.5} />
