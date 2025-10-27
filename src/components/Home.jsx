@@ -104,7 +104,8 @@ const Home = () => {
           </div>
         </form>
         {/* Animation Chopper */}
-        <div className="w-[680px] border border-amber-400">
+        <div className="w-[680px] h-[470px]">
+          <h4 className="text-3xl text-center">Explore gaming experience</h4>
           <Canvas
             camera={{ position: [0, 2.6, 13], fov: 70}} style={{ width: '50vw', height: '120vh' }}
           >
@@ -119,6 +120,8 @@ const Home = () => {
               autoRotate
               autoRotateSpeed={1}
               enableZoom={false}
+              minPolarAngle={Math.PI/2}
+               maxPolarAngle={Math.PI / 2}
             />
 
             {/* একটু নিচ থেকে আলো */}
