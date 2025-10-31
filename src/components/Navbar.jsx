@@ -1,3 +1,4 @@
+import { Link, NavLink } from 'react-router-dom';
 import Logo from '../assets/Logo.png';
 import styles from '../styles';
 const Navbar = () => {
@@ -12,7 +13,7 @@ const Navbar = () => {
 
 
       <div className="flex justify-center items-center text-[16px] gap-x-2">
-        <h3 className='btn btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl text-[16px] w-[130px] h-10 bg-slate-800'>Home</h3>
+        <Link to="/" className='btn btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl text-[16px] w-[130px] h-10 bg-slate-800'>Home</Link>
         <button className='btn btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl text-[16px] w-[130px] h-10'>All Reviews</button>
         <button className='btn btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl text-[16px] w-[130px] h-10 bg-slate-800'>Add Review</button>
         <button className='btn btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl text-[16px] w-[130px] h-10 bg-slate-800'>My Reviews</button>
@@ -20,9 +21,9 @@ const Navbar = () => {
       </div>
 
       <div className="flex justify-between gap-x-2 "> 
-       <button className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl text-[16px] w-20 h-10 bg-slate-800">Log In</button>
+       <NavLink to='/signin' className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl text-[16px] w-20 h-10 bg-slate-800">Log In</NavLink>
        
-       <button className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl text-[16px] w-20 h-10 bg-slate-800">Sign Up</button>
+       <NavLink to='/signup' className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl text-[16px] w-20 h-10 bg-slate-800">Sign Up</NavLink>
       </div>
 
     </div>

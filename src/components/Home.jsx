@@ -50,12 +50,16 @@ const Home = () => {
       <br />
       <br />
 
-      <h2 className="text-4xl">Insert your favourite game</h2>
+     
       <br />
 
       <div className="grid grid-cols-2 gap-6 items-start w-[1200px] h-[1000px]">
+
+
+
         {/* Form */}
-        <form className=" justify-evenly grid grid-rows-5">
+        <form className="flex flex-col justify-evenly">
+           <h2 className="text-3xl text-center">Insert your favourite game</h2>
           {/* Game Title Field */}
           <label htmlFor="title" className="block mb-1 font-medium">
             Game Title:
@@ -94,25 +98,24 @@ const Home = () => {
           />
           <br />
           {/* Submit Button */}
-          <div className="flex justify-end">
-            <button
-              onClick={handleSubmit}
-              className="btn btn-primary btn-outline w-[100px] active:!bg-[#FFF] active:!text-black"
-            >
-              Submit
-            </button>
+          <div className="flex justify-end w-[305px]">
+            <button onClick={handleSubmit} className="btn btn-primary btn-outline w-[100px] active:!bg-[#FFF] active:!text-black">Submit</button>
           </div>
         </form>
+
+
+
+
         {/* Animation Chopper */}
-        <div className="w-[680px] h-[470px]">
-          <h4 className="text-3xl text-center">Explore gaming experience</h4>
+        <div className="w-[680px] h-[470px] border border-amber-400 flex justify-start">
+          {/* <h4 className="text-3xl text-center">Explore gaming experience</h4> */}
           <Canvas
             camera={{ position: [0, 2.6, 13], fov: 70}} style={{ width: '50vw', height: '120vh' }}
           >
-            {/* Ambient light পুরো scene টা হালকা উজ্জ্বল করবে */}
+            {/* Ambient light =  full scene will be slightly lighten */}
             <ambientLight intensity={1.2} />
 
-            {/* Directional light একটু উঁচু দিক থেকে */}
+            {/* Directional light = from a little bit height */}
             <directionalLight position={[5, 10, 5]} intensity={1.5} />
             <OrbitControls
               minDistance={3}
@@ -124,7 +127,7 @@ const Home = () => {
                maxPolarAngle={Math.PI / 2}
             />
 
-            {/* একটু নিচ থেকে আলো */}
+            {/* light from a little bit below */}
             <pointLight position={[0, -5, 5]} intensity={1.5} />
 
             <Suspense fallback={null}>
