@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import google from '../assets/googleIcon.png';
+import github from '../assets/github.png';
 
 const SignIn = () => {
   return (
@@ -92,9 +94,12 @@ const SignIn = () => {
             </div>
 
             {/* Submit */}
-            <div className="form-control mt-6">
+            <div className="form-control mt-6 flex justify-between">
               <button className="btn btn-primary w-24 h-10">Login</button>
+              <div className="flex items-center w-auto"><p>Log in with</p>{} <img className="w-8 h-8 rounded-full" src={google} alt="" /><span> ||</span> <img className="w-8 h-8 rounded-full" src={github} alt="" /></div>
+             
             </div>
+            
           </form>
         </div>
       </div>

@@ -107,7 +107,7 @@ const Home = () => {
 
 
         {/* Animation Chopper */}
-        <div className="w-[680px] h-[470px] border border-amber-400 flex justify-start">
+        <div className="w-[680px] h-[470px] flex justify-start">
           {/* <h4 className="text-3xl text-center">Explore gaming experience</h4> */}
           <Canvas
             camera={{ position: [0, 2.6, 13], fov: 70}} style={{ width: '50vw', height: '120vh' }}
