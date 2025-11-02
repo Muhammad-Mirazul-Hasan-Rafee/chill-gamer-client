@@ -15,7 +15,7 @@ const Navbar = () => {
       <div className="flex justify-center items-center text-[16px] gap-x-2">
         <Link to="/" className='btn btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl text-[16px] w-[130px] h-10 bg-slate-800'>Home</Link>
         <button className='btn btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl text-[16px] w-[130px] h-10'>All Reviews</button>
-        <button className='btn btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl text-[16px] w-[130px] h-10 bg-slate-800'>Add Review</button>
+        <Link to="/addReview" className='btn btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl text-[16px] w-[130px] h-10 bg-slate-800'>Add Review</Link>
         <button className='btn btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl text-[16px] w-[130px] h-10 bg-slate-800'>My Reviews</button>
         <button className='btn btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl text-[16px] w-[150px] h-10 bg-slate-800'>Game WatchList</button>
       </div>

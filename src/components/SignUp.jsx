@@ -1,24 +1,60 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../Providers/AuthProvider";
+
 
 const SignUp = () => {
+   const {createUser} = useContext(AuthContext);
+
+
+  const handleSignUp = (e) =>{
+    e.preventDefault();
+
+    const name = e.target.name.value;
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+    const photourl = e.target.photourl.value;
+    console.log(name , email , password , photourl);
+
+    if(password.length < 6){
+      alert('Password must be at least 6 characters long!');
+      return;
+    }
+
+
+
+    createUser(email , password)
+    .then(result =>{
+      console.log(result.user);
+      
+    })
+    .catch(error=>{
+      console.log('error' , error);
+    })
+  }
+
+
+ 
+
+
   return (
-    <div className="hero min-h-screen bg-base-200 flex flex-col lg:flex-row items-center justify-center lg:justify-between px-6 lg:px-20">
+    <div className="hero min-h-screen bg-base-200 flex flex-col lg:flex-row items-center justify-center px-6 lg:px-20 text-center lg:text-left">
       
       {/* Left side text */}
-      <div className="text-center lg:text-left mb-8 lg:mb-0 lg:w-1/2">
-        <h4 className="text-3xl font-semibold text-gray-400 leading-snug">
+      <div className="mb-8 lg:mb-0 lg:w-1/2 flex justify-center lg:justify-start">
+        <h4 className="text-3xl font-semibold text-gray-400 leading-snug max-w-md">
           Sign up here to explore more gaming info and give your feedback
         </h4>
       </div>
 
       {/* Right side form */}
       <div className="lg:w-1/2 flex justify-center">
-        <div className="w-full max-w-sm shadow-2xl bg-base-100 rounded-lg p-6 -mt-6 lg:-mt-12">
+        <div className="w-full max-w-sm shadow-2xl bg-base-100 rounded-lg p-6">
           <div className="text-center mb-4">
             <h1 className="text-3xl font-bold">Create a new Account!</h1>
           </div>
 
-          <form className="">
+          <form onSubmit={handleSignUp} className="">
             {/* first row */}
             <div className="flex flex-col sm:flex-row gap-4">
               <div className="flex-1">
@@ -69,6 +105,7 @@ const SignUp = () => {
                   type="password"
                   placeholder="password"
                   name="password"
+                   
                   className="input input-bordered w-full"
                   required
                 />

@@ -1,42 +1,48 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
 import {
   createBrowserRouter,
-  RouterProvider, NavLink , Navigate
+  RouterProvider,
+  NavLink,
+  Navigate,
 } from "react-router-dom";
-import './index.css'
-import Root from './components/Root.jsx';
-import Home from './components/Home.jsx';
-import SignIn from './components/SignIn.jsx';
-import SignUp from './components/SignUp.jsx';
-
-
-
+import "./index.css";
+import Root from "./components/Root.jsx";
+import Home from "./components/Home.jsx";
+import SignIn from "./components/SignIn.jsx";
+import SignUp from "./components/SignUp.jsx";
+import AddReview from "./components/AddReview.jsx";
+import AuthProvider from "./Providers/AuthProvider.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root></Root>,
-    children:[
+    children: [
       {
-        path:'/',
-        element: <Home></Home>
-      },
-            {
-        path: 'signup',
-        element: <SignUp></SignUp>
+        path: "/",
+        element: <Home></Home>,
       },
       {
-        path: 'signin',
-        element: <SignIn></SignIn>      
+        path: "signup",
+        element: <SignUp></SignUp>,
       },
-
-    ]
+      {
+        path: "signin",
+        element: <SignIn></SignIn>,
+      },
+      {
+        path: "addReview",
+        element: <AddReview></AddReview>,
+      },
+    ],
   },
 ]);
 
-createRoot(document.getElementById('root')).render(
+createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <RouterProvider router={router} />
-  </StrictMode>,
-)
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
+  </StrictMode>
+);
