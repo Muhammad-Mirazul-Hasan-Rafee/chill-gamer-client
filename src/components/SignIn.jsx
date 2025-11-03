@@ -1,8 +1,57 @@
 import { Link } from "react-router-dom";
-import google from '../assets/googleIcon.png';
-import github from '../assets/github.png';
+import google from "../assets/googleIcon.png";
+import github from "../assets/github.png";
+import { FaEyeSlash, FaRegEye } from "react-icons/fa";
+import { useRef, useState } from "react";
+import {
+  sendPasswordResetEmail,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { auth } from "../Firebase/firebase.init";
+
+
+import { ToastContainer } from "react-toastify";
+import toast from "react-hot-toast";
 
 const SignIn = () => {
+  const [visiblePassword, setVisiblePassword] = useState(false);
+  const emailRef = useRef();
+  const notify = () => toast("Successfully logged in!");
+  const handleSignIn = (e) => {
+    e.preventDefault();
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+    const form = e.target;
+
+    // Sign in or log in
+    signInWithEmailAndPassword(auth, email, password)
+      .then((result) => {
+        console.log(result.user);
+        form.reset();
+        if (!result.user.emailVerified) {
+          alert("Please verify your email address!");
+        } else {
+          alert("Succuessfully logged in!");
+        }
+      })
+      .catch((error) => {
+        console.log("Error", error.message);
+      });
+  };
+
+  // Password reset link
+  const handleForgetPassword = () => {
+    const email = emailRef.current.value;
+    if (!email) {
+      alert("Please provide a valid email address!!");
+    } else {
+      sendPasswordResetEmail(auth, email)
+      .then(() => {
+       alert("✅ Password reset link has been sent to your email!");
+      });
+    }
+  };
+
   return (
     <div className="hero min-h-screen bg-base-200 relative">
       {/* 🔆 Border animation style */}
@@ -35,7 +84,6 @@ const SignIn = () => {
 
       {/* 🔹 Responsive layout */}
       <div className="hero-content flex flex-col-reverse lg:flex-row-reverse items-center justify-center gap-10 px-4 text-center lg:text-left">
-        
         {/* 🟡 RIGHT SIDE (Desktop) */}
         <div className="w-full max-w-md flex flex-col items-center lg:items-start">
           {/* 🔸 This heading will move ABOVE form in mobile */}
@@ -53,7 +101,7 @@ const SignIn = () => {
 
         {/* 🟢 LEFT SIDE FORM */}
         <div className="light-border card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100 order-2">
-          <form className="card-body">
+          <form onSubmit={handleSignIn} className="card-body">
             {/* Email */}
             <div className="form-control">
               <label className="label">
@@ -62,26 +110,42 @@ const SignIn = () => {
               <input
                 type="email"
                 placeholder="email"
+                name="email"
+                ref={emailRef}
                 className="input input-bordered"
                 required
               />
             </div>
 
             {/* Password */}
-            <div className="form-control">
+            <div className="form-control relative">
               <label className="label">
                 <span className="label-text">Password</span>
               </label>
               <input
-                type="password"
+                type={visiblePassword ? "text" : "password"}
                 placeholder="password"
+                name="password"
                 className="input input-bordered"
                 required
               />
+              <button
+                onClick={() => setVisiblePassword(!visiblePassword)}
+                className="btn btn-xs absolute top-13 right-12"
+              >
+                {visiblePassword ? <FaEyeSlash /> : <FaRegEye />}
+              </button>
 
               {/* Forgot + Sign Up */}
               <div className="flex justify-between items-center text-sm mt-3 flex-wrap gap-y-2">
-                <a href="#" className="label-text-alt link link-hover text-[13px]">
+                <a
+                  onClick={() => {
+                    handleForgetPassword();
+                   
+                  }}
+                  href="#"
+                  className="label-text-alt link link-hover text-[13px]"
+                >
                   Forgot password?
                 </a>
                 <p className="text-right text-[13px]">
@@ -95,14 +159,22 @@ const SignIn = () => {
 
             {/* Submit */}
             <div className="form-control mt-6 flex justify-between">
-              <button className="btn btn-primary w-24 h-10">Login</button>
-              <div className="flex items-center w-auto"><p>Log in with</p>{} <img className="w-8 h-8 rounded-full" src={google} alt="" /><span> ||</span> <img className="w-8 h-8 rounded-full" src={github} alt="" /></div>
-             
+              <button onClick={notify} className="btn btn-primary w-24 h-10">
+                Login
+              </button>
+              <div className="flex items-center w-auto">
+                <p>Log in with</p>
+                {} <img className="w-8 h-8 rounded-full" src={google} alt="" />
+                <span> ||</span>{" "}
+                <img className="w-8 h-8 rounded-full" src={github} alt="" />
+              </div>
             </div>
-            
           </form>
         </div>
       </div>
+     
+          
+
     </div>
   );
 };

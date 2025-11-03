@@ -14,6 +14,8 @@ import SignUp from "./components/SignUp.jsx";
 import AddReview from "./components/AddReview.jsx";
 import AuthProvider from "./Providers/AuthProvider.jsx";
 
+
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -43,6 +45,7 @@ createRoot(document.getElementById("root")).render(
   <StrictMode>
     <AuthProvider>
       <RouterProvider router={router} />
+     
     </AuthProvider>
   </StrictMode>
 );
