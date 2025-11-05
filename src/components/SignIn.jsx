@@ -2,18 +2,20 @@ import { Link } from "react-router-dom";
 import google from "../assets/googleIcon.png";
 import github from "../assets/github.png";
 import { FaEyeSlash, FaRegEye } from "react-icons/fa";
-import { useRef, useState } from "react";
-import {
-  sendPasswordResetEmail,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
+import { useContext, useRef, useState } from "react";
+
 import { auth } from "../Firebase/firebase.init";
 
 
 import { ToastContainer } from "react-toastify";
 import toast from "react-hot-toast";
+import { AuthContext } from "../Providers/AuthProvider";
 
 const SignIn = () => {
+
+  const {signInUser ,  passwordRest} = useContext(AuthContext);
+
+
   const [visiblePassword, setVisiblePassword] = useState(false);
   const emailRef = useRef();
   const notify = () => toast("Successfully logged in!");
@@ -24,7 +26,7 @@ const SignIn = () => {
     const form = e.target;
 
     // Sign in or log in
-    signInWithEmailAndPassword(auth, email, password)
+    signInUser(email, password)
       .then((result) => {
         console.log(result.user);
         form.reset();
@@ -45,7 +47,7 @@ const SignIn = () => {
     if (!email) {
       alert("Please provide a valid email address!!");
     } else {
-      sendPasswordResetEmail(auth, email)
+      passwordRest(auth, email)
       .then(() => {
        alert("✅ Password reset link has been sent to your email!");
       });

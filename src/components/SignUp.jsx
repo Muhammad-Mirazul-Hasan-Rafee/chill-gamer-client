@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../Providers/AuthProvider";
 import Swal from "sweetalert2";
 import { FaEyeSlash, FaRegEye } from "react-icons/fa";
-import { sendEmailVerification } from "firebase/auth";
+import { sendEmailVerification, updateProfile } from "firebase/auth";
 import { auth } from "../Firebase/firebase.init";
 
 const SignUp = () => {
@@ -52,7 +52,18 @@ const SignUp = () => {
         sendEmailVerification(auth.currentUser)
         .then(()=>{
           console.log('verification email sent!');
+        });
+
+        // update Name and profile url
+        const profile = {
+          displayName : name,
+          photo: photourl,
+        }
+        updateProfile(auth.currentUser , profile)
+        .then(()=>{
+          console.log('User profile updated!');
         })
+        .catch((error) => console.log('User profile updation error!!' , error));
       })
       .catch((error) => {
         if (error.code == "auth/email-already-in-use") {
