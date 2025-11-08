@@ -5,7 +5,10 @@ import { useContext } from "react";
 import { AuthContext } from "../Providers/AuthProvider";
 
 const Navbar = () => {
-  const { user, signOutUser } = useContext(AuthContext);
+  const { user, signOutUser, loading } = useContext(AuthContext);
+  if (loading) {
+    return <div>Loading...</div>;
+  }
   const handleSignOut = () => {
     signOutUser()
       .then(() => {
@@ -24,26 +27,39 @@ const Navbar = () => {
       </div>
 
       <div className="flex justify-center items-center text-[16px] gap-x-2">
+        {user && (
+          <>
+            <Link
+              to="/addReview"
+              className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl text-[16px] w-[130px] h-10 bg-slate-800"
+            >
+              Add Review
+            </Link>
+
+            <Link
+              to="/myreviews"
+              className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl text-[16px] w-[130px] h-10 bg-slate-800"
+            >
+              My Reviews
+            </Link>
+
+            <Link
+              to="/gamewatchlist"
+              className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl text-[16px] w-[150px] h-10 bg-slate-800"
+            >
+              Game WatchList
+            </Link>
+          </>
+        )}
         <Link
           to="/"
           className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl text-[16px] w-[130px] h-10 bg-slate-800"
         >
           Home
         </Link>
+
         <button className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl text-[16px] w-[130px] h-10">
           All Reviews
-        </button>
-        <Link
-          to="/addReview"
-          className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl text-[16px] w-[130px] h-10 bg-slate-800"
-        >
-          Add Review
-        </Link>
-        <button className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl text-[16px] w-[130px] h-10 bg-slate-800">
-          My Reviews
-        </button>
-        <button className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl text-[16px] w-[150px] h-10 bg-slate-800">
-          Game WatchList
         </button>
       </div>
 
@@ -57,11 +73,22 @@ const Navbar = () => {
 
         {user ? (
           <>
-            <img
-              src={user?.photoURL}
-              className="w-9 h-9 rounded-full"
-              alt={user?.displayName}
-            />
+            <Link
+              to={`/profile/${user?.uid}`}
+              className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl text-[16px] w-20 h-10 bg-slate-800"
+            >
+              Profile
+            </Link>
+
+            <Link to={`profile/${user?.uid}`}>
+           
+              <img
+                src={user?.photoURL}
+                className="w-9 h-9 rounded-full"
+                alt={user?.displayName}
+              />
+            </Link>
+
             <Link
               onClick={handleSignOut}
               className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl text-[16px] w-20 h-10 bg-slate-800"

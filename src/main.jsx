@@ -13,6 +13,10 @@ import SignIn from "./components/SignIn.jsx";
 import SignUp from "./components/SignUp.jsx";
 import AddReview from "./components/AddReview.jsx";
 import AuthProvider from "./Providers/AuthProvider.jsx";
+import PrivateRoute from "./Routes/PrivateRoute.jsx";
+import MyReviews from "./components/MyReviews.jsx";
+import GameWatchList from "./components/GameWatchList.jsx";
+import Profile from "./components/Profile.jsx";
 
 
 
@@ -34,9 +38,21 @@ const router = createBrowserRouter([
         element: <SignIn></SignIn>,
       },
       {
-        path: "addReview",
-        element: <AddReview></AddReview>,
+        path: "profile/:uid",
+        element: <PrivateRoute><Profile></Profile></PrivateRoute>
       },
+      {
+        path: "addReview",
+        element: <PrivateRoute><AddReview></AddReview></PrivateRoute>,
+      },
+      {
+        path: "myreviews",
+        element: <PrivateRoute><MyReviews></MyReviews></PrivateRoute>
+      },
+      {
+        path: "gamewatchlist",
+        element: <PrivateRoute><GameWatchList></GameWatchList></PrivateRoute>
+      }
     ],
   },
 ]);

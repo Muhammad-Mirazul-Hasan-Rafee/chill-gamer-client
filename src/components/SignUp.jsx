@@ -57,8 +57,10 @@ const SignUp = () => {
         // update Name and profile url
         const profile = {
           displayName : name,
-          photo: photourl,
+          photoURL: photourl,
         }
+        console.log(auth.currentUser);
+
         updateProfile(auth.currentUser , profile)
         .then(()=>{
           console.log('User profile updated!');
