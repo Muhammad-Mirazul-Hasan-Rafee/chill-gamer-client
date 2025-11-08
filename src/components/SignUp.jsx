@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Providers/AuthProvider";
 import Swal from "sweetalert2";
 import { FaEyeSlash, FaRegEye } from "react-icons/fa";
@@ -7,8 +7,13 @@ import { sendEmailVerification, updateProfile } from "firebase/auth";
 import { auth } from "../Firebase/firebase.init";
 
 const SignUp = () => {
-  const { createUser } = useContext(AuthContext);
+
+  const { user , createUser } = useContext(AuthContext);
   const [showPassword , setShowPassword] = useState(false);
+  const navigate = useNavigate();
+      if (user) {
+    return <Navigate to="/" replace />;
+  }
 
   const handleSignUp = (e) => {
     e.preventDefault();
@@ -28,6 +33,7 @@ const SignUp = () => {
     createUser(email, password)
       .then((result) => {
         console.log(result.user);
+        navigate('/');
         form.reset();
         const Toast = Swal.mixin({
           toast: true,

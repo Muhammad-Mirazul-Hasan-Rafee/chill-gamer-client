@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import google from "../assets/googleIcon.png";
 import github from "../assets/github.png";
 import { FaEyeSlash, FaRegEye } from "react-icons/fa";
@@ -6,14 +6,18 @@ import { useContext, useRef, useState } from "react";
 
 import { auth } from "../Firebase/firebase.init";
 
-
-import { ToastContainer } from "react-toastify";
 import toast from "react-hot-toast";
 import { AuthContext } from "../Providers/AuthProvider";
 
 const SignIn = () => {
+  const { user, signInUser , passwordRest } = useContext(AuthContext);
+   const navigate = useNavigate();
+    if(user){
+    return <Navigate to="/" replace/>;
+  }
 
-  const {signInUser ,  passwordRest} = useContext(AuthContext);
+ 
+
 
 
   const [visiblePassword, setVisiblePassword] = useState(false);
@@ -29,10 +33,13 @@ const SignIn = () => {
     signInUser(email, password)
       .then((result) => {
         console.log(result.user);
+        navigate('/');
         form.reset();
         if (!result.user.emailVerified) {
           alert("Please verify your email address!");
-        } else {
+          return;
+        } 
+        else {
           alert("Succuessfully logged in!");
         }
       })
@@ -47,7 +54,7 @@ const SignIn = () => {
     if (!email) {
       alert("Please provide a valid email address!!");
     } else {
-      passwordRest(auth, email)
+      passwordRest(email)
       .then(() => {
        alert("✅ Password reset link has been sent to your email!");
       });
@@ -133,7 +140,7 @@ const SignIn = () => {
               />
               <button
                 onClick={() => setVisiblePassword(!visiblePassword)}
-                className="btn btn-xs absolute top-13 right-12"
+                className="btn btn-xs absolute right-2 top-12"
               >
                 {visiblePassword ? <FaEyeSlash /> : <FaRegEye />}
               </button>
