@@ -1,4 +1,5 @@
 import React from "react";
+import Swal from "sweetalert2";
 
 const AddReview = () => {
   const handleSubmit = (e) => {
@@ -14,24 +15,43 @@ const AddReview = () => {
     const thumbnail = form.thumbnail.value;
     const genres = form.genres.value;
 
-    const newGame = {gameTitle , reviewDescription , name , email , rating , publishingYear , thumbnail , genres};
-
+    const newGame = {
+      gameTitle,
+      reviewDescription,
+      name,
+      email,
+      rating,
+      publishingYear,
+      thumbnail,
+      genres,
+    };
 
     console.log(newGame);
 
     // Sending data to the server
-    fetch('http://localhost:8000/game' , {
+    fetch("http://localhost:8000/game", {
       method: "POST",
-      headers:{
-        'content-type': 'application/json'
+      headers: {
+        "content-type": "application/json",
       },
-      body: JSON.stringify(newGame)
+      body: JSON.stringify(newGame),
     })
-    .then(res=> res.json())
-    .then(data =>{
-      console.log(data);
-    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
 
+        if (data.insertedId) {
+          Swal.fire({
+            title: "Hurrah!",
+            text: "Review inserted successfully!",
+            imageUrl: thumbnail,
+            imageWidth: 400,
+            imageHeight: 200,
+            imageAlt: gameTitle,
+             
+          });
+        }
+      });
   };
   return (
     <div className="flex justify-center">
@@ -61,7 +81,7 @@ const AddReview = () => {
             <input
               type="text"
               placeholder="review description"
-               name="reviewdescription"
+              name="reviewdescription"
               className="input input-primary w-[300px] text-gray-400"
             />
           </section>
@@ -76,7 +96,7 @@ const AddReview = () => {
             <input
               type="text"
               placeholder="your name"
-               name="name"
+              name="name"
               className="input input-primary w-[300px] text-gray-400"
             />
           </section>
@@ -88,7 +108,7 @@ const AddReview = () => {
             <input
               type="email"
               placeholder="email"
-               name="email"
+              name="email"
               className="input input-primary w-[300px] text-gray-400"
             />
           </section>
@@ -116,7 +136,7 @@ const AddReview = () => {
             <input
               type="number"
               placeholder="rating"
-               name="rating"
+              name="rating"
               className="input input-primary w-[300px] text-gray-400"
             />
           </section>
@@ -128,7 +148,7 @@ const AddReview = () => {
             <input
               type="number"
               placeholder="publishing year"
-               name="publishingyear"
+              name="publishingyear"
               className="input input-primary w-[300px] text-gray-400"
             />
           </section>
@@ -142,7 +162,7 @@ const AddReview = () => {
             <input
               type="text"
               placeholder="thumbnail url"
-               name="thumbnail"
+              name="thumbnail"
               className="input input-primary w-[300px] text-gray-400"
             />
           </section>
@@ -164,10 +184,7 @@ const AddReview = () => {
 
         {/* Submit Button */}
         <div className="flex justify-end w-[650px]">
-          <button
-            
-            className="btn btn-primary btn-outline w-[100px] active:!bg-[#FFF] active:!text-black"
-          >
+          <button className="btn btn-primary btn-outline w-[100px] active:!bg-[#FFF] active:!text-black">
             Submit
           </button>
         </div>
